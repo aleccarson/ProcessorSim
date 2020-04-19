@@ -8,58 +8,57 @@
 /* 10 Points */
 void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
 {
-    // Addition
-    if(ALUcontrol == 0)
-        *ALUresult = A + B;
+    switch(ALUControl)
+    {
+        // addition
+        case 0:
+            *ALUresult = A + B;
+            break;
 
-    // Subtraction
-    if(ALUcontrol == 1)
-        *ALUresult = A - B;
+        // subtract
+        case 1:
+            *ALUresult = A - B;
+            break;
 
-    // signed Less than   
-    if(ALUcontrol == 2)
-        {
+        // signed less than
+        case 2:
             if((signed)A < (signed)B)
                 *ALUresult = 1;
-            else
-                *ALUresult = 0;            
-        }
 
-    // Less than unsigned   
-    if(ALUcontrol == 3)
-        {
+            *ALUresult = 0;
+            break;
+
+        case 3:
             if(A < B)
                 *ALUresult = 1;
-            else
-                *ALUresult = 0;            
-        }
 
-        // bitwise AND
-        if(ALUcontrol == 4)
+            *ALUresult = 0;
+            break;
+        
+        // bitwise and
+        case 4:
             *ALUresult = (A & B);
+            break;
 
-    // bitwise OR
-    if(ALUcontrol == 5)
-        *ALUresult = (A | B);
+        // bitwise or
+        case 5:
+            *ALUresult = (A | B);
+            break;
 
-    // A < 0
-    if(ALUcontrol == 6)
-    {
-        if (A < 0)
-            *ALUresult = 1;
+        // A < 0
+        case 6:
+            if(A < 0)
+                *ALUresult = 1;
 
-        *ALUresult = 0;
+            *ALUresult = 0;
+            break;
+
+        case 7:
+            *ALUresult = ~A;
+            break;
+
+        
     }
-
-    // bitwse NOT
-    if(ALUcontrol == 7)
-        *ALUresult = ~A;
-
-    if(*ALUresult == 0)
-        *Zero = 1;
-
-    *Zero = 0;
-    
 }
 
 /* instruction fetch */
